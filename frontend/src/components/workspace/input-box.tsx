@@ -57,7 +57,6 @@ import {
   type PromptInputMessage,
 } from "@/components/ai-elements/prompt-input";
 import { Button } from "@/components/ui/button";
-import { ConfettiButton } from "@/components/ui/confetti-button";
 import {
   Dialog,
   DialogContent,
@@ -3116,10 +3115,18 @@ export function InputBox({
             className="border-primary/30 bg-primary/5 pointer-events-auto absolute inset-0 z-20 animate-pulse cursor-wait rounded-2xl border opacity-80"
           />
         )}
-        {extraHeader && (
+        {(extraHeader || isWelcomeMode) && (
           <div className="absolute top-0 right-0 left-0 z-10">
-            <div className="absolute right-0 bottom-0 left-0 flex items-center justify-center">
+            <div className="absolute right-0 bottom-0 left-0 flex flex-col items-center justify-center">
               {extraHeader}
+              {isWelcomeMode &&
+                searchParams.get("mode") !== "skill" &&
+                !showCommandSuggestions &&
+                !showMentions && (
+                  <div className="flex w-full items-center justify-center pb-4">
+                    <SuggestionList onSelectPlaceholder={onSelectPlaceholder} />
+                  </div>
+                )}
             </div>
           </div>
         )}
@@ -3739,14 +3746,6 @@ export function InputBox({
         <div className="bg-background absolute right-0 -bottom-[17px] left-0 z-0 h-4"></div>
       )}
 
-      {isWelcomeMode &&
-        searchParams.get("mode") !== "skill" &&
-        !showCommandSuggestions &&
-        !showMentions && (
-          <div className="flex items-center justify-center pt-2">
-            <SuggestionList onSelectPlaceholder={onSelectPlaceholder} />
-          </div>
-        )}
 
       <p
         className={cn(
@@ -3843,14 +3842,6 @@ function SuggestionList({
   );
   return (
     <Suggestions className="min-h-16 w-full max-w-full justify-center px-4 sm:w-fit sm:px-0">
-      <ConfettiButton
-        className="text-muted-foreground cursor-pointer rounded-full px-4 text-xs font-normal"
-        variant="outline"
-        size="sm"
-        onClick={() => handleSuggestionClick(t.inputBox.surpriseMePrompt)}
-      >
-        <SparklesIcon className="size-4" /> {t.inputBox.surpriseMe}
-      </ConfettiButton>
       {t.inputBox.suggestions.map((suggestion) => (
         <Suggestion
           key={suggestion.suggestion}

@@ -44,7 +44,7 @@ export function Welcome({
         className,
       )}
     >
-      <div className="max-w-full text-2xl font-bold">
+      <div className="max-w-full text-3xl font-bold">
         {searchParams.get("mode") === "skill" ? (
           `✨ ${t.welcome.createYourOwnSkill} ✨`
         ) : (

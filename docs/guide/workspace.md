@@ -1,5 +1,11 @@
 # Workspace UI
 
+## Default entry point
+
+Opening `/` redirects directly to `/workspace`, skipping the product introduction
+page. The workspace opens a new Agent chat (or the first demo conversation in a
+static demo). Existing workspace authentication requirements still apply.
+
 ## Token usage dashboard
 
 Open **Token usage** in the workspace sidebar (`/workspace/usage`) to review
@@ -21,6 +27,10 @@ fields and server-side pricing configuration remain supported.
 See [dashboard behavior and design](../../frontend/docs/token-usage-dashboard.md).
 
 ## Workspace
+
+On the new-chat welcome screen, prompt shortcuts (Write, Research,
+Collect, Learn and Create) appear below the welcome text and above the composer.
+
 
 The workspace keeps a collapsed icon sidebar visible on narrow screens. Its
 toggle opens the full navigation drawer; closing the drawer returns to the icon
